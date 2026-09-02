@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidad - Contay</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 20px;
+    line-height: 1.6;
+    color: #1a1a1a;
+  }
+  h1 { color: #2E7D32; }
+  h2 { color: #2E7D32; margin-top: 32px; }
+  .updated { color: #666; font-size: 0.9em; margin-bottom: 24px; }
+  ul { padding-left: 20px; }
+  .contact { background: #f0f7f0; padding: 16px; border-radius: 8px; margin-top: 32px; }
+</style>
+</head>
+<body>
+
+<h1>Política de Privacidad de Contay</h1>
+<p class="updated">Última actualización: septiembre de 2026</p>
+
+<p>Esta Política de Privacidad describe cómo Contay ("la app", "nosotros") recopila, usa y protege la información de los usuarios. Al usar Contay, aceptas las prácticas descritas en este documento.</p>
+
+<h2>1. Información que recopilamos</h2>
+<p>Contay recopila los siguientes tipos de información:</p>
+<ul>
+  <li><strong>Notificaciones bancarias:</strong> la app lee el contenido de las notificaciones push generadas por aplicaciones de bancos y billeteras digitales instaladas en tu dispositivo (por ejemplo, BancoEstado, Banco de Chile, Santander, BCI, Falabella, MercadoPago), con el único fin de identificar transacciones (montos, comercios, tipo de movimiento) y categorizarlas automáticamente.</li>
+  <li><strong>Datos de cuenta:</strong> correo electrónico y, opcionalmente, datos de autenticación mediante Google (OAuth) si eliges iniciar sesión con esa opción.</li>
+  <li><strong>Datos financieros ingresados o generados en la app:</strong> transacciones, categorías, montos, tarjetas registradas, metas de ahorro y configuraciones personales.</li>
+  <li><strong>Datos de uso y diagnóstico:</strong> información técnica básica para identificar errores y mejorar el funcionamiento de la app.</li>
+</ul>
+
+<h2>2. Cómo usamos la información</h2>
+<ul>
+  <li>Para categorizar automáticamente tus gastos, ingresos y transferencias.</li>
+  <li>Para mostrarte reportes, gráficos y estadísticas de tus finanzas personales dentro de la app.</li>
+  <li>Para sincronizar tu información entre dispositivos mediante tu cuenta.</li>
+  <li>Para mostrar publicidad (plan gratuito) a través de Google AdMob.</li>
+  <li>Para mejorar la precisión de la categorización de transacciones.</li>
+</ul>
+
+<h2>3. Procesamiento local y en la nube</h2>
+<p>El contenido de las notificaciones bancarias se procesa <strong>localmente en tu dispositivo</strong> mediante un servicio de escucha de notificaciones (NotificationListenerService de Android). Contay no envía el texto completo de tus notificaciones a servidores externos; solo se almacenan los datos ya procesados de la transacción (monto, categoría, fecha, comercio) en nuestra base de datos en la nube (Supabase), protegida mediante autenticación y reglas de seguridad a nivel de fila (Row Level Security), que garantizan que solo tú puedas acceder a tus propios datos.</p>
+
+<h2>4. Con quién compartimos información</h2>
+<p>No vendemos ni compartimos tu información financiera con terceros con fines comerciales. Compartimos datos únicamente con:</p>
+<ul>
+  <li><strong>Supabase:</strong> proveedor de infraestructura en la nube utilizado para almacenar de forma segura tus datos de cuenta y transacciones.</li>
+  <li><strong>Google AdMob:</strong> para la visualización de anuncios en el plan gratuito.</li>
+  <li><strong>Google Play Billing:</strong> para procesar suscripciones al plan Pro.</li>
+</ul>
+
+<h2>5. Permisos utilizados</h2>
+<ul>
+  <li><strong>Acceso a notificaciones:</strong> necesario para detectar y categorizar automáticamente tus transacciones bancarias. Sin este permiso, la función principal de la app no puede operar.</li>
+  <li><strong>Notificaciones locales:</strong> para avisarte sobre movimientos detectados o recordatorios dentro de la app.</li>
+  <li><strong>Biometría / bloqueo con PIN:</strong> opcional, para proteger el acceso a la app.</li>
+</ul>
+
+<h2>6. Seguridad de los datos</h2>
+<p>Implementamos medidas de seguridad técnicas y organizativas para proteger tu información, incluyendo cifrado en tránsito, autenticación segura y controles de acceso a nivel de base de datos. Ningún sistema es 100% infalible, pero trabajamos para mantener tus datos protegidos.</p>
+
+<h2>7. Retención y eliminación de datos</h2>
+<p>Puedes eliminar tu cuenta y tus datos en cualquier momento desde la configuración de la app. Al eliminar tu cuenta, tus datos financieros almacenados en la nube serán eliminados de forma permanente.</p>
+
+<h2>8. Datos de menores</h2>
+<p>Contay no está dirigida a menores de edad y no recopilamos intencionalmente información de usuarios menores de 18 años.</p>
+
+<h2>9. Cambios a esta política</h2>
+<p>Podemos actualizar esta Política de Privacidad ocasionalmente. Notificaremos cambios importantes a través de la app o actualizando la fecha en la parte superior de este documento.</p>
+
+<h2>10. Contacto</h2>
+<div class="contact">
+  <p>Si tienes preguntas sobre esta Política de Privacidad o sobre el tratamiento de tus datos, puedes escribirnos a:</p>
+  <p><strong>contayapp@gmail.com</strong></p>
+</div>
+
+</body>
+</html>
