@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eliminación de cuenta – Contay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-primary:  #2E7D32;
+      --green-dark:     #1B5E20;
+      --green-light:    #4CAF50;
+      --orange-accent:  #FF6D00;
+      --bg:             #F6F9F6;
+      --surface:        #FFFFFF;
+      --text-main:      #1A1A1A;
+      --text-muted:     #5C6B5C;
+      --border:         #D6E8D6;
+      --radius:         14px;
+      --shadow:         0 4px 24px rgba(46,125,50,.10);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 0 0 60px;
+    }
+    header {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-primary) 100%);
+      padding: 48px 24px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; left: 0; right: 0;
+      height: 60px;
+      background: var(--bg);
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+    .header-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px; height: 72px;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,.25));
+    }
+    header h1 { font-size: 1.75rem; font-weight: 700; color: #fff; letter-spacing: -.3px; }
+    header p.subtitle { margin-top: 8px; font-size: .9rem; color: rgba(255,255,255,.75); }
+    main {
+      max-width: 720px;
+      margin: 60px auto 0;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      color: #E65100;
+      font-size: .78rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 100px;
+      letter-spacing: .3px;
+    }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--orange-accent); }
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 24px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .card-icon svg { width: 22px; height: 22px; }
+    .card-icon.green  { background: #E8F5E9; color: var(--green-primary); }
+    .card-icon.orange { background: #FFF3E0; color: var(--orange-accent); }
+    .card-icon.mail   { background: #E3F2FD; color: #1565C0; }
+    .card-icon.shield { background: #F3E5F5; color: #6A1B9A; }
+    .card-title { font-size: 1rem; font-weight: 600; color: var(--text-main); }
+    .card-subtitle { font-size: .8rem; color: var(--text-muted); margin-top: 2px; }
+    .card-body { padding: 22px 24px; }
+    .steps { display: flex; flex-direction: column; gap: 14px; }
+    .step { display: flex; align-items: flex-start; gap: 14px; }
+    .step-num {
+      flex-shrink: 0;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--green-primary);
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-text { padding-top: 5px; font-size: .93rem; line-height: 1.5; color: var(--text-main); }
+    .step-text strong { color: var(--green-dark); }
+    .grace-banner {
+      background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+      border: 1px solid #A5D6A7;
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .grace-banner svg { flex-shrink: 0; color: var(--green-primary); width: 22px; height: 22px; margin-top: 2px; }
+    .grace-banner p { font-size: .88rem; line-height: 1.65; color: #2E4A2F; }
+    .grace-banner p strong { color: var(--green-dark); }
+    .warn-banner {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-top: 14px;
+    }
+    .warn-banner svg { flex-shrink: 0; color: var(--orange-accent); width: 20px; height: 20px; margin-top: 2px; }
+    .warn-banner p { font-size: .85rem; line-height: 1.6; color: #5D4037; }
+    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 520px) { .data-grid { grid-template-columns: 1fr; } }
+    .data-col { border-radius: 10px; padding: 16px; }
+    .data-col.deleted { background: #FFEBEE; border: 1px solid #EF9A9A; }
+    .data-col.kept    { background: #E8F5E9; border: 1px solid #A5D6A7; }
+    .data-col-title {
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .data-col.deleted .data-col-title { color: #C62828; }
+    .data-col.kept    .data-col-title { color: var(--green-dark); }
+    .data-col ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .data-col ul li { font-size: .87rem; color: var(--text-main); display: flex; align-items: center; gap: 8px; line-height: 1.4; }
+    .data-col ul li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .data-col.deleted ul li::before { background: #E53935; }
+    .data-col.kept    ul li::before { background: var(--green-primary); }
+    .mail-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 10px 18px;
+      background: #1565C0;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 600;
+      transition: background .2s;
+    }
+    .mail-link:hover { background: #0D47A1; }
+    .mail-link svg { width: 16px; height: 16px; }
+    .mail-step { font-size: .9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 4px; }
+    .mail-step strong { color: var(--text-main); }
+    .contact-footer {
+      text-align: center;
+      padding: 28px 24px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .contact-footer p { font-size: .9rem; color: var(--text-muted); margin-bottom: 10px; }
+    .contact-footer a { color: var(--green-primary); font-weight: 600; text-decoration: none; }
+    .contact-footer a:hover { text-decoration: underline; }
+    .updated-tag { text-align: center; font-size: .78rem; color: var(--text-muted); margin-top: -8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-icon">
+      <img src="contay_logo.svg" alt="Contay" style="width:64px;height:64px;" />
+    </div>
+    <h1>Eliminación de cuenta</h1>
+    <p class="subtitle">Contay</p>
+  </header>
+  <main>
+    <p class="updated-tag">Última actualización: septiembre de 2026</p>
+    <div>
+      <span class="badge">
+        <span class="badge-dot"></span>
+        Acción permanente &mdash; léelo con atención
+      </span>
+    </div>
+    <!-- Opción 1 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2"/>
+            <line x1="12" y1="18" x2="12" y2="18.01"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-title">Opción 1 &mdash; Eliminar desde la app</div>
+          <div class="card-subtitle">La forma más rápida</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">Abre <strong>Contay</strong> e inicia sesión con tu cuenta.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">Dirígete a <strong>Ajustes</strong> desde el menú principal.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">Selecciona <strong>Eliminar cuenta</strong>.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">Lee el aviso y <strong>confirma la acción</strong> cuando se te solicite.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Período de gracia -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-title">Período de gracia &mdash; 30 días</div>
+          <div class="card-subtitle">Tienes un mes para arrepentirte</div>
+        </div>
+      </div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:14px;">
+        <div class="grace-banner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <p>Al solicitar la eliminación, tu cuenta se <strong>desactiva de inmediato</strong> (no aparece en ningún inicio de sesión), pero durante <strong>30 días</strong> tus datos siguen en nuestros servidores. Si dentro de ese período vuelves a iniciar sesión con tu correo y contraseña (o con Google), tu cuenta y todos tus datos se <strong>reactivan automáticamente</strong> sin pérdida de información.</p>
+        </div>
+        <div class="warn-banner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <p>Si <strong>no inicias sesión</strong> dentro de los 30 días, tu cuenta y todos los datos asociados se eliminarán de forma <strong>permanente e irreversible</strong> de nuestros servidores.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Datos -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon shield">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-title">Datos eliminados y datos conservados</div>
+          <div class="card-subtitle">Qué le ocurre a tu información</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="data-grid">
+          <div class="data-col deleted">
+            <div class="data-col-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+              Se eliminan
+            </div>
+            <ul>
+              <li>Perfil y nombre de usuario</li>
+              <li>Correo electrónico</li>
+              <li>Contraseña (hash)</li>
+              <li>Datos de conteos y registros</li>
+              <li>Preferencias y ajustes</li>
+              <li>Historial de actividad</li>
+              <li>Tokens de sesión</li>
+            </ul>
+          </div>
+          <div class="data-col kept">
+            <div class="data-col-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Se conservan
+            </div>
+            <ul>
+              <li>Registros de transacciones requeridos por ley</li>
+              <li>Datos anonimizados para estadísticas</li>
+              <li>Información necesaria para resolver disputas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Opción 2 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-title">Opción 2 &mdash; Solicitar por correo</div>
+          <div class="card-subtitle">Si no puedes acceder a la app</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="mail-step">Escríbenos desde el correo asociado a tu cuenta con el asunto:</p>
+        <p style="font-size:.95rem;font-weight:700;color:var(--text-main);margin:8px 0 4px;font-family:monospace;background:#F3F4F6;display:inline-block;padding:6px 12px;border-radius:6px;">"Solicitud de eliminación de cuenta"</p>
+        <p class="mail-step" style="margin-top:10px;">Procesaremos tu solicitud en un plazo máximo de <strong>30 días</strong>.</p>
+        <a class="mail-link" href="mailto:contayapp@gmail.com?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20cuenta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          contayapp@gmail.com
+        </a>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="contact-footer">
+      <p>¿Tienes dudas sobre este proceso?</p>
+      <p>Estamos para ayudarte en <a href="mailto:contayapp@gmail.com">contayapp@gmail.com</a></p>
+    </div>
+  </main>
+</body>
+</html>
